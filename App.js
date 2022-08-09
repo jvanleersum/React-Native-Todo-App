@@ -67,11 +67,10 @@ const styles = StyleSheet.create({
     flex: 6,
     marginTop: 16,
     borderTopWidth: 1,
-    borderColor: '#cccccc'
+    borderColor: 'whitesmoke'
   },
   noGoalsText: {
     fontStyle: 'italic',
-    color: '#acabab',
     alignSelf: "center",
     margin: 16
   }
