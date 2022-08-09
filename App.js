@@ -3,15 +3,20 @@ import {
   StyleSheet,
   View,
   FlatList,
+  Button,
+  Text,
 } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 const App = () => {
   const [courseGoals, setCourseGoals] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const hasGoals = courseGoals.length > 0;
 
   const addGoalHandler = (newGoal) => {
     setCourseGoals((prevGoals) => [...prevGoals, newGoal]);
+    setShowModal(false);
   }
 
   const removeGoalHandler = (goalId) => {
@@ -21,20 +26,30 @@ const App = () => {
     })
   }
 
+  const openModalHandler = () => {
+    setShowModal(true);
+  }
+
+  const closeModalHandler = () => {
+    setShowModal(false);
+  }
+
   return (
     <View style={styles.appContainer}>
-      <GoalInput addGoal={addGoalHandler}/>
+      <Button onPress={openModalHandler} title="Add New Goal" />
+      <GoalInput showModal={showModal} addGoal={addGoalHandler} onCloseModalHandler={closeModalHandler}/>
       <View style={styles.goalsContainer}>
-        <FlatList
+        {hasGoals && <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
             return (
-              <GoalItem itemData={itemData} onDeleteGoal={removeGoalHandler}/>
+              <GoalItem item={itemData.item} onDeleteGoal={removeGoalHandler}/>
             );
           }}
-          keyExtractor={(item, index) => {item.id}}
+          keyExtractor={item => item.id}
           alwaysBounceVertical={false}
-        ></FlatList>
+        ></FlatList>}
+        {!hasGoals && <Text style={styles.noGoalsText}>No goals yet</Text>}
       </View>
     </View>
   );
@@ -50,5 +65,14 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 6,
+    marginTop: 16,
+    borderTopWidth: 1,
+    borderColor: '#cccccc'
+  },
+  noGoalsText: {
+    fontStyle: 'italic',
+    color: '#acabab',
+    alignSelf: "center",
+    margin: 16
   }
 });
