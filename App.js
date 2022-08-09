@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   View,
@@ -35,6 +36,8 @@ const App = () => {
   }
 
   return (
+    <>
+    <StatusBar style="light" />
     <View style={styles.appContainer}>
       <Button onPress={openModalHandler} title="Add New Goal" color="orange" />
       <GoalInput showModal={showModal} addGoal={addGoalHandler} onCloseModalHandler={closeModalHandler}/>
@@ -52,6 +55,7 @@ const App = () => {
         {!hasGoals && <Text style={styles.noGoalsText}>No goals yet</Text>}
       </View>
     </View>
+    </>
   );
 }
 
