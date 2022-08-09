@@ -36,7 +36,7 @@ const App = () => {
 
   return (
     <View style={styles.appContainer}>
-      <Button onPress={openModalHandler} title="Add New Goal" />
+      <Button onPress={openModalHandler} title="Add New Goal" color="orange" />
       <GoalInput showModal={showModal} addGoal={addGoalHandler} onCloseModalHandler={closeModalHandler}/>
       <View style={styles.goalsContainer}>
         {hasGoals && <FlatList
