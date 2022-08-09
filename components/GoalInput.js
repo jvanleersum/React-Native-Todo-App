@@ -15,11 +15,13 @@ const GoalInput = (props) => {
     const goalId = Math.random().toString();
     const newGoal = { id: goalId, text: enteredText };
     props.addGoal(newGoal);
+    setEnteredText('');
   };
 
   return (
     <View style={styles.inputContainer}>
       <TextInput
+        value={enteredText}
         style={styles.textInput}
         placeholder="Your course goal!"
         onChangeText={goalInputHandler}
