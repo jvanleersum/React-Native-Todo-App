@@ -14,6 +14,13 @@ const App = () => {
     setCourseGoals((prevGoals) => [...prevGoals, newGoal]);
   }
 
+  const removeGoalHandler = (goalId) => {
+    setCourseGoals((prevGoals) => {
+      const newGoalList = prevGoals.filter(item => item.id !== goalId)
+      return newGoalList
+    })
+  }
+
   return (
     <View style={styles.appContainer}>
       <GoalInput addGoal={addGoalHandler}/>
@@ -22,7 +29,7 @@ const App = () => {
           data={courseGoals}
           renderItem={(itemData) => {
             return (
-              <GoalItem itemData={itemData}/>
+              <GoalItem itemData={itemData} onDeleteGoal={removeGoalHandler}/>
             );
           }}
           keyExtractor={(item, index) => {item.id}}
